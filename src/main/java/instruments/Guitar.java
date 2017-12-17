@@ -1,18 +1,25 @@
 package instruments;
 
-public class Guitar extends Instrument {
-    private int numberOfStrings;
+import instruments.guitarparts.GuitarBody;
+import instruments.guitarparts.GuitarString;
+import instruments.guitarparts.GuitarNeck;
 
-    public Guitar(String material, String family, String colour, int numberOfStrings) {
+import java.util.ArrayList;
+
+public class Guitar extends Instrument implements IPlay {
+    private ArrayList<GuitarString> Strings;
+    private GuitarNeck neck;
+    private GuitarBody body;
+
+    public Guitar(String material, String family, String colour, ArrayList<GuitarString> strings,
+                  GuitarNeck neck, GuitarBody body) {
         super(material, family, colour);
-        this.numberOfStrings = numberOfStrings;
+        Strings = strings;
+        this.neck = neck;
+        this.body = body;
     }
 
-    public int getNumberOfStrings() {
-        return numberOfStrings;
-    }
-
-    public void setNumberOfStrings(int numberOfStrings) {
-        this.numberOfStrings = numberOfStrings;
+    public String play() {
+        return "Guitar Sounds";
     }
 }
