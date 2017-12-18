@@ -4,10 +4,15 @@ import instruments.guitarparts.GuitarNeck;
 import instruments.guitarparts.GuitarString;
 import org.junit.Before;
 import org.junit.Test;
+import shop.ISell;
+import shop.Shop;
 import shop.items.InstrumentForSale;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 public class ShopTest {
     private Guitar testGuitar;
@@ -20,7 +25,8 @@ public class ShopTest {
     private GuitarString string4;
     private GuitarString string5;
     private GuitarString string6;
-    private InstrumentForSale<Guitar> testInstrumentForSale;
+    private ISell testInstrumentForSale;
+    private Shop testShop;
 
     @Before
     public void before() {
@@ -35,7 +41,30 @@ public class ShopTest {
         strings = new ArrayList<>(Arrays.asList(string1, string2, string3, string4, string5, string6));
         testGuitar = new Guitar("Wood", "String", "Black", strings, testNeck, testBody);
         testInstrumentForSale = new InstrumentForSale<>(testGuitar, 1000, 1200);
+        testShop = new Shop();
     }
-    
+
+    @Test
+    public void canCalculateMarkup() {
+        assertEquals(200, testInstrumentForSale.calculateMarkup());
+    }
+
+    @Test
+    public void shopStartsEmpty() {
+       ArrayList<ISell> test = new ArrayList<>();
+       assertEquals(test, testShop.getItems());
+    }
+
+    @Test
+    public void canAddItem() {
+        testShop.addItem(testInstrumentForSale);
+        assertEquals(1, testShop.getItems().size());
+    }
+
+    @Test
+    public void canGetItem() {
+        testShop.addItem(testInstrumentForSale);
+        assertEquals(testInstrumentForSale, testShop.getItems().get(0));
+    }
 
 }
