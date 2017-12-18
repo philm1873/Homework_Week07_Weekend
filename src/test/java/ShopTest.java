@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
 
 public class ShopTest {
     private Guitar testGuitar;
@@ -52,19 +51,27 @@ public class ShopTest {
     @Test
     public void shopStartsEmpty() {
        ArrayList<ISell> test = new ArrayList<>();
-       assertEquals(test, testShop.getItems());
+       assertEquals(test, testShop.getStock());
     }
 
     @Test
     public void canAddItem() {
-        testShop.addItem(testInstrumentForSale);
-        assertEquals(1, testShop.getItems().size());
+        testShop.addStock(testInstrumentForSale);
+        assertEquals(1, testShop.getStock().size());
     }
 
     @Test
     public void canGetItem() {
-        testShop.addItem(testInstrumentForSale);
-        assertEquals(testInstrumentForSale, testShop.getItems().get(0));
+        testShop.addStock(testInstrumentForSale);
+        assertEquals(testInstrumentForSale, testShop.getStock().get(0));
+    }
+
+    @Test
+    public void canRemoveItem() {
+        testShop.addStock(testInstrumentForSale);
+        assertEquals(1, testShop.getStock().size());
+        testShop.removeStock(testInstrumentForSale);
+        assertEquals(0, testShop.getStock().size());
     }
 
 }

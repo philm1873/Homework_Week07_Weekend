@@ -3,17 +3,22 @@ package shop;
 import java.util.ArrayList;
 
 public class Shop {
-    ArrayList<ISell> items;
+    ArrayList<ISell> stock;
 
     public Shop() {
-        this.items = new ArrayList<>();
+        this.stock = new ArrayList<>();
     }
 
-    public ArrayList<ISell> getItems() {
-        return items;
+    public ArrayList<ISell> getStock() {
+        return stock;
     }
 
-    public void addItem(ISell item) {
-        items.add(item);
+    public void addStock(ISell item) {
+        stock.add(item);
     }
+
+    public void removeStock(ISell item) {
+        stock.remove(item);
+    }
+
 }
